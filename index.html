@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Happy Smile — Clínica Odontológica</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #2563EB;
+  --primary-light: #EFF6FF;
+  --primary-dark: #1E40AF;
+  --mint: #ECFDF5;
+  --mint-accent: #10B981;
+  --lavender: #F5F3FF;
+  --lavender-accent: #7C3AED;
+  --peach: #FFF7ED;
+  --peach-accent: #F97316;
+  --red: #FEF2F2;
+  --red-accent: #EF4444;
+  --yellow: #FFFBEB;
+  --yellow-accent: #F59E0B;
+  --green: #ECFDF5;
+  --green-accent: #10B981;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-400: #9CA3AF;
+  --gray-600: #4B5563;
+  --gray-800: #1F2937;
+  --white: #FFFFFF;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 24px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-800);
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* SCREENS */
+.screen { display: none; min-height: 100vh; padding-bottom: 100px; }
+.screen.active { display: block; }
+
+/* HEADER */
+.header {
+  background: var(--white);
+  padding: 16px 20px 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--gray-100);
+  box-shadow: var(--shadow-sm);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--primary), #60A5FA);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  line-height: 1.1;
+}
+
+.logo-sub {
+  font-size: 11px;
+  color: var(--gray-400);
+  font-weight: 400;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--gray-600);
+  padding: 4px;
+  display: none;
+}
+
+.sede-badge {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: none;
+}
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 430px;
+  background: var(--white);
+  border-top: 1px solid var(--gray-100);
+  display: flex;
+  padding: 8px 0 20px;
+  z-index: 200;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+}
+
+.nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  cursor: pointer;
+  padding: 4px;
+  border: none;
+  background: none;
+}
+
+.nav-icon { font-size: 22px; }
+.nav-label { font-size: 10px; color: var(--gray-400); font-weight: 500; }
+.nav-item.active .nav-label { color: var(--primary); font-weight: 600; }
+.nav-item.active .nav-icon { filter: none; }
+
+/* WHATSAPP FLOAT */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 90px;
+  right: calc(50% - 210px);
+  width: 52px;
+  height: 52px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+  cursor: pointer;
+  z-index: 150;
+  border: none;
+  transition: transform 0.2s;
+}
+.whatsapp-btn:active { transform: scale(0.95); }
+
+/* CARDS */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin: 0 16px 12px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100);
+}
+
+.card-gradient {
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 60%, #60A5FA 100%);
+  margin: 0;
+  padding: 28px 20px 32px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '😊';
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  font-size: 120px;
+  opacity: 0.1;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.hero-sub {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-bottom: 20px;
+}
+
+.sede-selector-title {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.8;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sedes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.sede-btn {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 12px;
+  padding: 10px 6px;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  backdrop-filter: blur(4px);
+}
+
+.sede-btn:active, .sede-btn.selected {
+  background: rgba(255,255,255,0.35);
+  border-color: white;
+  transform: scale(0.97);
+}
+
+.sede-btn-icon { font-size: 18px; margin-bottom: 4px; }
+.sede-btn-name { font-size: 11px; font-weight: 600; }
+.sede-btn-addr { font-size: 10px; opacity: 0.75; }
+
+/* SECTION TITLE */
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 20px 20px 8px;
+}
+
+/* SERVICE GRID */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 0 16px;
+}
+
+.service-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100);
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card:active { transform: scale(0.97); }
+
+.service-card.b2 { background: linear-gradient(135deg, #EFF6FF, #DBEAFE); border-color: #BFDBFE; }
+.service-card.b3 { background: linear-gradient(135deg, #F5F3FF, #EDE9FE); border-color: #DDD6FE; }
+.service-card.b4 { background: linear-gradient(135deg, #ECFDF5, #D1FAE5); border-color: #A7F3D0; }
+.service-card.b5 { background: linear-gradient(135deg, #FFF7ED, #FED7AA); border-color: #FDBA74; }
+
+.service-icon { font-size: 28px; margin-bottom: 8px; }
+.service-name { font-size: 13px; font-weight: 600; color: var(--gray-800); line-height: 1.3; }
+.service-desc { font-size: 11px; color: var(--gray-600); margin-top: 4px; }
+
+/* URGENCIA COLORS */
+.urgencia-alta { background: linear-gradient(135deg, #FEF2F2, #FEE2E2); border: 1px solid #FECACA; border-radius: var(--radius); margin: 0 16px 10px; padding: 16px; }
+.urgencia-media { background: linear-gradient(135deg, #FFFBEB, #FEF3C7); border: 1px solid #FDE68A; border-radius: var(--radius); margin: 0 16px 10px; padding: 16px; }
+.urgencia-baja { background: linear-gradient(135deg, #ECFDF5, #D1FAE5); border: 1px solid #A7F3D0; border-radius: var(--radius); margin: 0 16px 10px; padding: 16px; }
+
+.urgencia-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.urgencia-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.dot-red { background: #EF4444; box-shadow: 0 0 8px rgba(239,68,68,0.5); }
+.dot-yellow { background: #F59E0B; box-shadow: 0 0 8px rgba(245,158,11,0.5); }
+.dot-green { background: #10B981; box-shadow: 0 0 8px rgba(16,185,129,0.5); }
+
+.urgencia-title { font-size: 15px; font-weight: 700; }
+.urgencia-sub { font-size: 11px; color: var(--gray-600); margin-left: auto; }
+
+.urgencia-item {
+  background: rgba(255,255,255,0.6);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.urgencia-item-title { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+.urgencia-item-desc { font-size: 12px; color: var(--gray-600); }
+
+/* ACCORDION */
+.accordion {
+  background: var(--white);
+  border-radius: var(--radius);
+  margin: 0 16px 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100);
+}
+
+.accordion-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+}
+
+.accordion-title { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.accordion-arrow { font-size: 16px; transition: transform 0.2s; color: var(--gray-400); }
+.accordion.open .accordion-arrow { transform: rotate(180deg); }
+
+.accordion-body {
+  display: none;
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--gray-100);
+}
+
+.accordion.open .accordion-body { display: block; }
+
+/* POST CARDS */
+.post-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 12px;
+}
+.post-tabs::-webkit-scrollbar { display: none; }
+
+.post-tab {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--gray-600);
+  transition: all 0.2s;
+}
+
+.post-tab.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.post-content { display: none; padding: 0 16px; }
+.post-content.active { display: block; }
+
+.post-section {
+  margin-bottom: 14px;
+}
+
+.post-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.label-normal { color: var(--mint-accent); }
+.label-hacer { color: var(--primary); }
+.label-evitar { color: var(--peach-accent); }
+.label-llamar { color: var(--red-accent); }
+
+.post-items { display: flex; flex-direction: column; gap: 6px; }
+
+.post-item {
+  background: var(--gray-50);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--gray-700);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.post-item::before { content: '•'; color: var(--gray-400); flex-shrink: 0; margin-top: 1px; }
+
+/* PROCEDIMIENTOS */
+.proc-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  margin: 0 16px 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100);
+  cursor: pointer;
+}
+
+.proc-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.proc-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.proc-info { flex: 1; }
+.proc-name { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+.proc-desc { font-size: 12px; color: var(--gray-400); }
+.proc-arrow { color: var(--gray-300); font-size: 18px; }
+
+.proc-body {
+  display: none;
+  padding: 0 16px 16px;
+  border-top: 1px solid var(--gray-100);
+}
+
+.proc-card.open .proc-body { display: block; }
+.proc-card.open .proc-arrow { transform: rotate(90deg); }
+
+.proc-section { margin-bottom: 12px; }
+.proc-section-title { font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; margin-top: 12px; }
+.proc-text { font-size: 13px; color: var(--gray-700); line-height: 1.5; }
+.proc-list { list-style: none; }
+.proc-list li { font-size: 13px; color: var(--gray-700); padding: 4px 0; display: flex; gap: 8px; }
+.proc-list li::before { content: '›'; color: var(--primary); font-weight: 700; flex-shrink: 0; }
+
+/* ESPECIALIDADES */
+.esp-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  margin: 0 16px 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100);
+  cursor: pointer;
+}
+
+.esp-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--lavender), var(--white));
+}
+
+.esp-icon { font-size: 28px; }
+.esp-info { flex: 1; }
+.esp-name { font-size: 15px; font-weight: 700; font-family: 'Playfair Display', serif; }
+.esp-tag { font-size: 11px; color: var(--lavender-accent); font-weight: 600; }
+.esp-premium { background: linear-gradient(90deg, #7C3AED, #A78BFA); color: white; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+.esp-arrow { color: var(--gray-300); font-size: 18px; transition: transform 0.2s; }
+.esp-card.open .esp-arrow { transform: rotate(90deg); }
+
+.esp-body {
+  display: none;
+  padding: 16px;
+  border-top: 1px solid var(--gray-100);
+}
+
+.esp-card.open .esp-body { display: block; }
+
+/* FAQ */
+.faq-cats {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 12px;
+}
+.faq-cats::-webkit-scrollbar { display: none; }
+
+.faq-cat {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  color: var(--gray-600);
+  transition: all 0.2s;
+}
+
+.faq-cat.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+}
+
+.faq-list { padding: 0 16px; }
+
+.faq-item {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100);
+}
+
+.faq-q {
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.faq-a {
+  display: none;
+  padding: 0 16px 14px;
+  font-size: 13px;
+  color: var(--gray-600);
+  line-height: 1.6;
+  border-top: 1px solid var(--gray-100);
+  padding-top: 10px;
+}
+
+.faq-item.open .faq-a { display: block; }
+.faq-arrow { color: var(--gray-400); font-size: 14px; flex-shrink: 0; transition: transform 0.2s; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+/* PREVENCIÓN CAROUSEL */
+.prev-carousel {
+  display: flex;
+  gap: 12px;
+  padding: 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin-bottom: 12px;
+}
+.prev-carousel::-webkit-scrollbar { display: none; }
+
+.prev-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 20px 16px;
+  min-width: 160px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100);
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.prev-card-icon { font-size: 36px; margin-bottom: 10px; }
+.prev-card-title { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.prev-card-items { list-style: none; }
+.prev-card-items li { font-size: 11px; color: var(--gray-600); padding: 2px 0; }
+
+/* PERFIL SEDE */
+.sede-info-card {
+  background: linear-gradient(135deg, var(--primary-light), var(--white));
+  border-radius: var(--radius);
+  margin: 0 16px 12px;
+  padding: 20px;
+  border: 1px solid #BFDBFE;
+}
+
+.sede-name { font-size: 18px; font-weight: 700; font-family: 'Playfair Display', serif; color: var(--primary-dark); margin-bottom: 4px; }
+.sede-addr { font-size: 13px; color: var(--gray-600); margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.contact-btn {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--gray-700);
+  transition: all 0.2s;
+}
+.contact-btn:active { transform: scale(0.97); }
+
+.team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0 16px 12px; }
+.team-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 16px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100);
+}
+.team-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), #60A5FA); display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 10px; }
+.team-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.team-role { font-size: 11px; color: var(--gray-400); }
+
+/* TURNOS */
+.turno-step {
+  background: var(--white);
+  border-radius: var(--radius);
+  margin: 0 16px 12px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-100);
+}
+
+.step-num { font-size: 11px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+.step-title { font-size: 16px; font-weight: 700; margin-bottom: 14px; }
+
+.motivo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.motivo-btn {
+  background: var(--gray-50);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 12px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.motivo-btn.selected { border-color: var(--primary); background: var(--primary-light); }
+.motivo-btn:active { transform: scale(0.97); }
+.motivo-icon { font-size: 22px; margin-bottom: 4px; }
+.motivo-label { font-size: 12px; font-weight: 600; color: var(--gray-700); }
+
+.input-field {
+  width: 100%;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--gray-800);
+  margin-bottom: 10px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.input-field:focus { border-color: var(--primary); }
+
+.radio-group { display: flex; gap: 10px; margin-bottom: 10px; }
+.radio-btn {
+  flex: 1;
+  background: var(--gray-50);
+  border: 2px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--gray-700);
+}
+.radio-btn.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-primary:active { transform: scale(0.98); }
+
+/* RED / GESTIÓN */
+.red-section {
+  background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+  border: 1px solid #FED7AA;
+  border-radius: var(--radius);
+  margin: 0 16px 12px;
+  padding: 20px;
+}
+
+.red-title { font-size: 16px; font-weight: 700; font-family: 'Playfair Display', serif; color: #92400E; margin-bottom: 4px; }
+.red-sub { font-size: 12px; color: #B45309; margin-bottom: 16px; }
+
+.red-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.red-btn {
+  background: var(--white);
+  border: 1px solid #FED7AA;
+  border-radius: var(--radius-sm);
+  padding: 14px 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.red-btn:active { transform: scale(0.97); }
+.red-btn-icon { font-size: 24px; margin-bottom: 6px; }
+.red-btn-label { font-size: 11px; font-weight: 700; color: #92400E; }
+.red-btn-count { font-size: 10px; color: #B45309; margin-top: 2px; }
+
+.powered {
+  text-align: center;
+  padding: 20px;
+  font-size: 11px;
+  color: var(--gray-400);
+}
+
+.powered span { color: var(--primary); font-weight: 700; }
+
+/* SEARCH */
+.search-bar {
+  margin: 12px 16px;
+  position: relative;
+}
+.search-input {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  padding: 12px 14px 12px 40px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+}
+.search-icon {
+  position: absolute;
+  left: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--gray-400);
+}
+
+/* ANIMACIONES */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.screen.active { animation: fadeIn 0.25s ease; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <button class="back-btn" id="backBtn" onclick="goBack()">←</button>
+    <div class="logo">
+      <div class="logo-icon">🦷</div>
+      <div>
+        <div class="logo-text">Happy Smile</div>
+        <div class="logo-sub">Clínica Odontológica</div>
+      </div>
+    </div>
+    <div class="sede-badge" id="sedeBadge">Centro</div>
+  </div>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<button class="whatsapp-btn" onclick="openWhatsApp()" title="Contactar por WhatsApp">💬</button>
+
+<!-- SCREEN: INICIO -->
+<div class="screen active" id="screen-inicio">
+
+  <div class="hero">
+    <div class="hero-title">Tu salud dental,<br>siempre cerca 😊</div>
+    <div class="hero-sub">Selecciona tu sede más cercana</div>
+    <div class="sede-selector-title">📍 Elegí tu sede</div>
+    <div class="sedes-grid">
+      <div class="sede-btn" onclick="selectSede('Centro', 'Av. Principal 123')">
+        <div class="sede-btn-icon">🏙️</div>
+        <div class="sede-btn-name">Centro</div>
+        <div class="sede-btn-addr">Av. Principal 123</div>
+      </div>
+      <div class="sede-btn" onclick="selectSede('Norte', 'Calle Norte 456')">
+        <div class="sede-btn-icon">🌿</div>
+        <div class="sede-btn-name">Norte</div>
+        <div class="sede-btn-addr">Calle Norte 456</div>
+      </div>
+      <div class="sede-btn" onclick="selectSede('Sur', 'Av. Sur 789')">
+        <div class="sede-btn-icon">🌊</div>
+        <div class="sede-btn-name">Sur</div>
+        <div class="sede-btn-addr">Av. Sur 789</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">¿Qué necesitas hoy?</div>
+
+  <div class="services-grid">
+    <div class="service-card b2" onclick="showScreen('screen-urgencias')">
+      <div class="service-icon">🚨</div>
+      <div class="service-name">Urgencias</div>
+      <div class="service-desc">Triaje inmediato</div>
+    </div>
+    <div class="service-card b2" onclick="showScreen('screen-general')">
+      <div class="service-icon">🦷</div>
+      <div class="service-name">Odontología General</div>
+      <div class="service-desc">Tratamientos base</div>
+    </div>
+    <div class="service-card b3" onclick="showScreen('screen-especialidades')">
+      <div class="service-icon">⭐</div>
+      <div class="service-name">Especialidades</div>
+      <div class="service-desc">Implantes, ortodoncia...</div>
+    </div>
+    <div class="service-card b4" onclick="showScreen('screen-orientacion')">
+      <div class="service-icon">💡</div>
+      <div class="service-name">Orientación</div>
+      <div class="service-desc">Cuidados y consejos</div>
+    </div>
+    <div class="service-card b4" onclick="showScreen('screen-post')">
+      <div class="service-icon">🩹</div>
+      <div class="service-name">Después de tu turno</div>
+      <div class="service-desc">Post-procedimientos</div>
+    </div>
+    <div class="service-card b5" onclick="showScreen('screen-red')">
+      <div class="service-icon">🕸️</div>
+      <div class="service-name">Red Profesional</div>
+      <div class="service-desc">Derivaciones y red</div>
+    </div>
+  </div>
+
+  <div class="powered">Powered by <span>Radii</span> · byradi.com</div>
+</div>
+
+<!-- SCREEN: URGENCIAS -->
+<div class="screen" id="screen-urgencias">
+  <div class="section-title">🚨 Triaje de Urgencias</div>
+
+  <div class="urgencia-alta">
+    <div class="urgencia-header">
+      <div class="urgencia-dot dot-red"></div>
+      <div class="urgencia-title">🔴 Urgencia Alta</div>
+      <div class="urgencia-sub">Consultar de inmediato</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Cara hinchada</div>
+      <div class="urgencia-item-desc">Urgencia odontológica. Puede necesitar antibiótico</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Diente que se salió por golpe</div>
+      <div class="urgencia-item-desc">No tocar. Morder gasa suave. Consultar urgente</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Diente que se salió completamente</div>
+      <div class="urgencia-item-desc">Colocarlo en leche o saliva. Ir urgente al odontólogo</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Inflamación con dolor (absceso)</div>
+      <div class="urgencia-item-desc">No apretar. Enjuague de agua tibia con sal. Consultar urgente</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Sangrado después de extracción</div>
+      <div class="urgencia-item-desc">Morder gasa 30 min sin hablar. Si dura más de 12 hs, llamar urgente</div>
+    </div>
+  </div>
+
+  <div class="urgencia-media">
+    <div class="urgencia-header">
+      <div class="urgencia-dot dot-yellow"></div>
+      <div class="urgencia-title">🟡 Urgencia Media</div>
+      <div class="urgencia-sub">Consultar pronto</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Dolor dental fuerte</div>
+      <div class="urgencia-item-desc">Tomar analgésico habitual. Evitar calor. Consultar lo antes posible</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Diente roto</div>
+      <div class="urgencia-item-desc">Evitar morder con ese diente. Guardar el fragmento</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Dolor en muela del juicio</div>
+      <div class="urgencia-item-desc">Enjuagues con agua tibia y sal. Analgésico habitual</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Corona suelta / Resina caída</div>
+      <div class="urgencia-item-desc">No masticar en esa zona. Guardarla si se cayó</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Llaga en la boca</div>
+      <div class="urgencia-item-desc">Evitar picante/ácido. Gel bucal si tienes</div>
+    </div>
+  </div>
+
+  <div class="urgencia-baja">
+    <div class="urgencia-header">
+      <div class="urgencia-dot dot-green"></div>
+      <div class="urgencia-title">🟢 Consulta Programada</div>
+      <div class="urgencia-sub">Sacar turno</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Sensibilidad leve ocasional</div>
+      <div class="urgencia-item-desc">Pasta para dientes sensibles. Consultar si persiste más de 2 semanas</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Mancha o caries sin dolor</div>
+      <div class="urgencia-item-desc">Reservar turno de control</div>
+    </div>
+    <div class="urgencia-item">
+      <div class="urgencia-item-title">Consulta estética</div>
+      <div class="urgencia-item-desc">Consultar opciones con el profesional</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: ODONTOLOGÍA GENERAL -->
+<div class="screen" id="screen-general">
+  <div class="section-title">🦷 Odontología General</div>
+
+  <div class="proc-card" onclick="toggleProc(this)">
+    <div class="proc-header">
+      <div class="proc-icon-wrap" style="background:#EFF6FF">🦷</div>
+      <div class="proc-info">
+        <div class="proc-name">Resinas</div>
+        <div class="proc-desc">Restauración del color natural</div>
+      </div>
+      <div class="proc-arrow">›</div>
+    </div>
+    <div class="proc-body">
+      <div class="proc-section-title">¿Qué es?</div>
+      <div class="proc-text">Restauración del diente con material del color del diente. Devuelve forma, función y estética al diente dañado por caries o fractura.</div>
+      <div class="proc-section-title">¿Cuándo se necesita?</div>
+      <ul class="proc-list">
+        <li>Cuando hay caries</li>
+        <li>Diente fracturado</li>
+        <li>Mejorar forma o color</li>
+        <li>Reemplazar resinas viejas</li>
+      </ul>
+      <div class="proc-section-title">¿Duele?</div>
+      <div class="proc-text">No — se realiza con anestesia local. Puede haber sensibilidad leve algunos días.</div>
+      <div class="proc-section-title">¿Cuánto dura?</div>
+      <div class="proc-text">Entre 30 y 60 minutos según el tamaño.</div>
+    </div>
+  </div>
+
+  <div class="proc-card" onclick="toggleProc(this)">
+    <div class="proc-header">
+      <div class="proc-icon-wrap" style="background:#ECFDF5">🧹</div>
+      <div class="proc-info">
+        <div class="proc-name">Limpieza Profesional</div>
+        <div class="proc-desc">Profilaxis y detartraje</div>
+      </div>
+      <div class="proc-arrow">›</div>
+    </div>
+    <div class="proc-body">
+      <div class="proc-section-title">¿Qué es?</div>
+      <div class="proc-text">Eliminación del sarro y placa bacteriana que el cepillo no puede eliminar. También llamada profilaxis o detartraje.</div>
+      <div class="proc-section-title">Beneficios</div>
+      <ul class="proc-list">
+        <li>Encías más sanas</li>
+        <li>Menos sangrado</li>
+        <li>Eliminación de manchas</li>
+        <li>Prevención de enfermedad periodontal</li>
+        <li>Mejor aliento</li>
+      </ul>
+      <div class="proc-section-title">¿Duele?</div>
+      <div class="proc-text">Generalmente no. Puede haber sensibilidad si hay sarro acumulado.</div>
+      <div class="proc-section-title">¿Cuánto dura?</div>
+      <div class="proc-text">Entre 30 y 60 minutos según el caso.</div>
+    </div>
+  </div>
+
+  <div class="proc-card" onclick="toggleProc(this)">
+    <div class="proc-header">
+      <div class="proc-icon-wrap" style="background:#FFF7ED">🔬</div>
+      <div class="proc-info">
+        <div class="proc-name">Tratamiento de Conducto</div>
+        <div class="proc-desc">Salvar el diente natural</div>
+      </div>
+      <div class="proc-arrow">›</div>
+    </div>
+    <div class="proc-body">
+      <div class="proc-section-title">¿Qué es?</div>
+      <div class="proc-text">Tratamiento que permite salvar un diente con el nervio infectado o muy dañado.</div>
+      <div class="proc-section-title">¿Cuándo se necesita?</div>
+      <ul class="proc-list">
+        <li>Dolor intenso y espontáneo</li>
+        <li>Caries muy profunda</li>
+        <li>Infección o absceso</li>
+        <li>Diente que cambió de color</li>
+      </ul>
+      <div class="proc-section-title">¿Duele?</div>
+      <div class="proc-text">No durante el procedimiento — se realiza con anestesia local.</div>
+      <div class="proc-section-title">⚠️ Importante</div>
+      <div class="proc-text">Después del conducto, el diente debe restaurarse con resina o corona para evitar fracturas.</div>
+    </div>
+  </div>
+
+  <div class="proc-card" onclick="toggleProc(this)">
+    <div class="proc-header">
+      <div class="proc-icon-wrap" style="background:#FEF2F2">🔧</div>
+      <div class="proc-info">
+        <div class="proc-name">Extracciones</div>
+        <div class="proc-desc">Simple o quirúrgica</div>
+      </div>
+      <div class="proc-arrow">›</div>
+    </div>
+    <div class="proc-body">
+      <div class="proc-section-title">¿Cuándo se necesita?</div>
+      <ul class="proc-list">
+        <li>Destrucción muy avanzada</li>
+        <li>Infección severa</li>
+        <li>Muela del juicio impactada</li>
+        <li>Por indicación ortodóntica</li>
+      </ul>
+      <div class="proc-section-title">¿Duele?</div>
+      <div class="proc-text">No — se realiza con anestesia local.</div>
+      <div class="proc-section-title">⚠️ Importante</div>
+      <div class="proc-text">Después de una extracción es fundamental evaluar la reposición del diente perdido — implante, puente o prótesis — para evitar el desplazamiento de los dientes vecinos.</div>
+    </div>
+  </div>
+
+  <div class="proc-card" onclick="toggleProc(this)">
+    <div class="proc-header">
+      <div class="proc-icon-wrap" style="background:#F5F3FF">👄</div>
+      <div class="proc-info">
+        <div class="proc-name">Prótesis</div>
+        <div class="proc-desc">Fija, removible o sobre implantes</div>
+      </div>
+      <div class="proc-arrow">›</div>
+    </div>
+    <div class="proc-body">
+      <div class="proc-section-title">Tipos</div>
+      <ul class="proc-list">
+        <li>Puente fijo — usa dientes vecinos como apoyo</li>
+        <li>Prótesis removible parcial — para varios dientes faltantes</li>
+        <li>Prótesis total — para arcada completa sin dientes</li>
+        <li>Prótesis sobre implantes — la más estable y duradera</li>
+      </ul>
+      <div class="proc-section-title">¿Duele?</div>
+      <div class="proc-text">La colocación no duele. El período de adaptación puede generar molestias leves.</div>
+    </div>
+  </div>
+
+  <div class="proc-card" onclick="toggleProc(this)">
+    <div class="proc-header">
+      <div class="proc-icon-wrap" style="background:#FFFBEB">✨</div>
+      <div class="proc-info">
+        <div class="proc-name">Estética Dental</div>
+        <div class="proc-desc">Blanqueamiento y carillas</div>
+      </div>
+      <div class="proc-arrow">›</div>
+    </div>
+    <div class="proc-body">
+      <div class="proc-section-title">Tratamientos</div>
+      <ul class="proc-list">
+        <li>Blanqueamiento — en consultorio o domiciliario</li>
+        <li>Carillas de porcelana — alta estética y durabilidad</li>
+        <li>Carillas de resina — opción conservadora e inmediata</li>
+        <li>Remodelado estético — ajustes de forma sin desgaste</li>
+      </ul>
+      <div class="proc-section-title">⚠️ Importante</div>
+      <div class="proc-text">Primero se resuelven caries y problemas de encías. Luego se planifica la estética.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: ESPECIALIDADES -->
+<div class="screen" id="screen-especialidades">
+  <div class="section-title">⭐ Especialidades</div>
+
+  <div class="esp-card" onclick="toggleEsp(this)">
+    <div class="esp-header">
+      <div class="esp-icon">🦷</div>
+      <div class="esp-info">
+        <div class="esp-name">Implantología</div>
+        <div class="esp-tag">Mayor ticket · Alta tecnología</div>
+      </div>
+      <div class="esp-premium">PREMIUM</div>
+      <div class="esp-arrow">›</div>
+    </div>
+    <div class="esp-body">
+      <ul class="proc-list">
+        <li>Raíz artificial de titanio para reemplazar dientes perdidos</li>
+        <li>Implante unitario, puente o prótesis completa sobre implantes</li>
+        <li>Proceso: Evaluación → Cirugía → Oseointegración (2-6 meses) → Corona</li>
+        <li>Se siente como un diente natural</li>
+        <li>Preserva el hueso — no afecta dientes vecinos</li>
+      </ul>
+      <div class="proc-section-title">⚠️ Importante</div>
+      <div class="proc-text">El tabaco y la diabetes no controlada pueden afectar la integración. Informar antecedentes médicos.</div>
+    </div>
+  </div>
+
+  <div class="esp-card" onclick="toggleEsp(this)">
+    <div class="esp-header">
+      <div class="esp-icon">😁</div>
+      <div class="esp-info">
+        <div class="esp-name">Ortodoncia</div>
+        <div class="esp-tag">Brackets · Alineadores · Lingual</div>
+      </div>
+      <div class="esp-arrow">›</div>
+    </div>
+    <div class="esp-body">
+      <ul class="proc-list">
+        <li>Brackets metálicos — alta eficacia, opción más económica</li>
+        <li>Brackets estéticos — menos visibles, misma eficacia</li>
+        <li>Alineadores transparentes — removibles, casi invisibles</li>
+        <li>Ortodoncia lingual — totalmente invisible desde afuera</li>
+      </ul>
+      <div class="proc-section-title">⚠️ Importante</div>
+      <div class="proc-text">El uso de retenedores al finalizar es fundamental para mantener los resultados. No hay límite de edad.</div>
+    </div>
+  </div>
+
+  <div class="esp-card" onclick="toggleEsp(this)">
+    <div class="esp-header">
+      <div class="esp-icon">🩸</div>
+      <div class="esp-info">
+        <div class="esp-name">Periodoncia</div>
+        <div class="esp-tag">Salud de encías y hueso</div>
+      </div>
+      <div class="esp-arrow">›</div>
+    </div>
+    <div class="esp-body">
+      <ul class="proc-list">
+        <li>Gingivitis → Periodontitis leve/moderada → Periodontitis avanzada</li>
+        <li>Limpieza profunda (raspaje y alisado radicular)</li>
+        <li>Cirugía periodontal para casos avanzados</li>
+        <li>Mantenimiento periodontal cada 3-4 meses</li>
+      </ul>
+      <div class="proc-section-title">⚠️ Importante</div>
+      <div class="proc-text">Relacionada con diabetes, enfermedades cardiovasculares y embarazo. Tratar las encías mejora la salud general.</div>
+    </div>
+  </div>
+
+  <div class="esp-card" onclick="toggleEsp(this)">
+    <div class="esp-header">
+      <div class="esp-icon">🏥</div>
+      <div class="esp-info">
+        <div class="esp-name">Cirugía Oral</div>
+        <div class="esp-tag">Procedimientos quirúrgicos</div>
+      </div>
+      <div class="esp-arrow">›</div>
+    </div>
+    <div class="esp-body">
+      <ul class="proc-list">
+        <li>Extracción de muelas del juicio retenidas</li>
+        <li>Cirugía de implantes con o sin injerto óseo</li>
+        <li>Injerto óseo — reconstrucción de hueso perdido</li>
+        <li>Frenectomía — corrección del frenillo</li>
+        <li>Apicectomía — cirugía en la punta de la raíz</li>
+      </ul>
+      <div class="proc-section-title">⚠️ Importante</div>
+      <div class="proc-text">Informar medicación, alergias, enfermedades y tabaquismo. El control postoperatorio es parte del tratamiento.</div>
+    </div>
+  </div>
+
+  <div class="esp-card" onclick="toggleEsp(this)">
+    <div class="esp-header">
+      <div class="esp-icon">✨</div>
+      <div class="esp-info">
+        <div class="esp-name">Estética Avanzada</div>
+        <div class="esp-tag">Diseño de Sonrisa · Carillas</div>
+      </div>
+      <div class="esp-premium">PREMIUM</div>
+      <div class="esp-arrow">›</div>
+    </div>
+    <div class="esp-body">
+      <ul class="proc-list">
+        <li>Diseño digital de sonrisa — ve el resultado antes de empezar</li>
+        <li>Carillas de porcelana — alta estética y durabilidad</li>
+        <li>Carillas de resina — opción conservadora e inmediata</li>
+        <li>Coronas estéticas — porcelana o zirconio</li>
+        <li>Remodelado estético con resina — resultado inmediato</li>
+      </ul>
+      <div class="proc-section-title">⚠️ Importante</div>
+      <div class="proc-text">Primero salud — luego estética. El mantenimiento es fundamental para la duración del resultado.</div>
+    </div>
+  </div>
+
+  <div class="esp-card" onclick="toggleEsp(this)">
+    <div class="esp-header">
+      <div class="esp-icon">👶</div>
+      <div class="esp-info">
+        <div class="esp-name">Odontopediatría</div>
+        <div class="esp-tag">Bebés, niños y adolescentes</div>
+      </div>
+      <div class="esp-arrow">›</div>
+    </div>
+    <div class="esp-body">
+      <ul class="proc-list">
+        <li>Primera consulta desde el primer diente o antes del año</li>
+        <li>Controles cada 6 meses — flúor y selladores</li>
+        <li>Tratamiento de caries en dientes de leche</li>
+        <li>Atención de traumatismos dentales</li>
+        <li>Ortodoncia interceptiva — corrección temprana de la mordida</li>
+      </ul>
+      <div class="proc-section-title">⚠️ Importante</div>
+      <div class="proc-text">Los dientes de leche son fundamentales. La higiene comienza antes del primer diente con gasa húmeda.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: ORIENTACIÓN -->
+<div class="screen" id="screen-orientacion">
+  <div class="section-title">💡 Prevención y Cuidados</div>
+
+  <div class="section-title" style="padding-top:4px">🪥 Higiene Diaria</div>
+  <div class="prev-carousel">
+    <div class="prev-card">
+      <div class="prev-card-icon">🪥</div>
+      <div class="prev-card-title">Cepillado</div>
+      <ul class="prev-card-items">
+        <li>Mínimo 2 veces al día</li>
+        <li>Mínimo 2 minutos</li>
+        <li>Cerdas suaves</li>
+        <li>Cambia cada 3 meses</li>
+      </ul>
+    </div>
+    <div class="prev-card">
+      <div class="prev-card-icon">🧵</div>
+      <div class="prev-card-title">Hilo Dental</div>
+      <ul class="prev-card-items">
+        <li>Una vez al día</li>
+        <li>Antes de dormir</li>
+        <li>Forma de C en cada diente</li>
+        <li>Si sangra al inicio es normal</li>
+      </ul>
+    </div>
+    <div class="prev-card">
+      <div class="prev-card-icon">💧</div>
+      <div class="prev-card-title">Enjuague</div>
+      <ul class="prev-card-items">
+        <li>Complementa el cepillado</li>
+        <li>Sin alcohol para uso diario</li>
+        <li>Después del hilo dental</li>
+      </ul>
+    </div>
+    <div class="prev-card">
+      <div class="prev-card-icon">👅</div>
+      <div class="prev-card-title">Lengua</div>
+      <ul class="prev-card-items">
+        <li>Limpiar diariamente</li>
+        <li>De atrás hacia adelante</li>
+        <li>Reduce mal aliento</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-title">📅 ¿Cada cuánto ir al odontólogo?</div>
+  <div class="card">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="background:var(--green);border-radius:10px;padding:12px;display:flex;gap:10px;align-items:center">
+        <span style="font-size:20px">😊</span>
+        <div>
+          <div style="font-size:13px;font-weight:600">Sin problemas</div>
+          <div style="font-size:12px;color:var(--gray-600)">Control cada 6 meses</div>
+        </div>
+      </div>
+      <div style="background:var(--yellow);border-radius:10px;padding:12px;display:flex;gap:10px;align-items:center">
+        <span style="font-size:20px">🦷</span>
+        <div>
+          <div style="font-size:13px;font-weight:600">Tendencia a caries</div>
+          <div style="font-size:12px;color:var(--gray-600)">Control cada 3 meses</div>
+        </div>
+      </div>
+      <div style="background:var(--red);border-radius:10px;padding:12px;display:flex;gap:10px;align-items:center">
+        <span style="font-size:20px">🩸</span>
+        <div>
+          <div style="font-size:13px;font-weight:600">Problemas de encías</div>
+          <div style="font-size:12px;color:var(--gray-600)">Según indicación profesional</div>
+        </div>
+      </div>
+      <div style="background:var(--lavender);border-radius:10px;padding:12px;display:flex;gap:10px;align-items:center">
+        <span style="font-size:20px">👶</span>
+        <div>
+          <div style="font-size:13px;font-weight:600">Tengo hijos pequeños</div>
+          <div style="font-size:12px;color:var(--gray-600)">Desde el primer diente, cada 6 meses</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">⚠️ Hábitos que dañan</div>
+  <div class="card">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--gray-100)"><span style="font-size:20px">🧊</span><span style="font-size:13px">Morder hielo, lapiceras o uñas</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--gray-100)"><span style="font-size:20px">🥤</span><span style="font-size:13px">Bebidas azucaradas frecuentes</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--gray-100)"><span style="font-size:20px">🚬</span><span style="font-size:13px">Fumar</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--gray-100)"><span style="font-size:20px">😬</span><span style="font-size:13px">Rechinar los dientes — bruxismo</span></div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0"><span style="font-size:20px">☕</span><span style="font-size:13px">Exceso de café, té o vino sin enjuague</span></div>
+    </div>
+  </div>
+
+  <div class="section-title">❓ Preguntas Frecuentes</div>
+  <div class="search-bar">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" type="text" placeholder="¿Qué te preocupa?">
+  </div>
+
+  <div class="faq-cats">
+    <div class="faq-cat active" onclick="setFaqCat(this, 'dolor')">🦷 Dolor</div>
+    <div class="faq-cat" onclick="setFaqCat(this, 'encias')">🩸 Encías</div>
+    <div class="faq-cat" onclick="setFaqCat(this, 'caries')">🦠 Caries</div>
+    <div class="faq-cat" onclick="setFaqCat(this, 'trat')">✨ Tratamientos</div>
+    <div class="faq-cat" onclick="setFaqCat(this, 'urg')">⚠️ Urgencias</div>
+  </div>
+
+  <div class="faq-list" id="faqList">
+    <div class="faq-item" data-cat="dolor">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Por qué me duele si no tengo caries? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Puede ser sensibilidad, encía retraída, bruxismo o inflamación interna del diente. No siempre hay caries. Consulta para un diagnóstico correcto.</div>
+    </div>
+    <div class="faq-item" data-cat="dolor">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Es normal que duela después de una resina? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Sí. Puede haber sensibilidad algunos días. Si aumenta o dura más de una semana, consulta.</div>
+    </div>
+    <div class="faq-item" data-cat="dolor">
+      <div class="faq-q" onclick="toggleFaq(this)">Sensibilidad al frío y calor <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Usa pasta dental para dientes sensibles. Si persiste más de 2 semanas, consultar.</div>
+    </div>
+    <div class="faq-item" data-cat="dolor">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Dolor al morder? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Puede ser inflamación del ligamento o fisura dental. Consulta para evaluación.</div>
+    </div>
+    <div class="faq-item" data-cat="encias">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Por qué sangran las encías? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Generalmente gingivitis por placa bacteriana. Mejora con mejor higiene. Si persiste más de 2 semanas, consulta.</div>
+    </div>
+    <div class="faq-item" data-cat="encias">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Qué es la periodontitis? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Enfermedad avanzada de encías que afecta el hueso. Puede causar movilidad dental y pérdida de dientes si no se trata.</div>
+    </div>
+    <div class="faq-item" data-cat="encias">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Es normal que sangren al usar hilo dental? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Sí al inicio. Debe mejorar en pocos días con el uso regular.</div>
+    </div>
+    <div class="faq-item" data-cat="caries">
+      <div class="faq-q" onclick="toggleFaq(this)">¿La caries siempre duele? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">No. Muchas son silenciosas y solo se detectan en controles regulares.</div>
+    </div>
+    <div class="faq-item" data-cat="caries">
+      <div class="faq-q" onclick="toggleFaq(this)">¿La caries se puede detener? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Solo en etapas muy iniciales con flúor y buena higiene. Una vez que avanzó, necesita tratamiento.</div>
+    </div>
+    <div class="faq-item" data-cat="caries">
+      <div class="faq-q" onclick="toggleFaq(this)">¿La caries se contagia? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Las bacterias que la causan sí pueden transmitirse. No compartir cubiertos ni besar en la boca a bebés.</div>
+    </div>
+    <div class="faq-item" data-cat="trat">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Duele el tratamiento de conducto? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">No con anestesia local. Es un procedimiento que elimina el dolor, no que lo causa.</div>
+    </div>
+    <div class="faq-item" data-cat="trat">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Duele una extracción? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">No con anestesia local. Después puede haber molestia leve que se maneja con analgésico habitual.</div>
+    </div>
+    <div class="faq-item" data-cat="trat">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Cuánto dura el blanqueamiento? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Depende de los hábitos. En promedio 1 a 2 años con buenos cuidados.</div>
+    </div>
+    <div class="faq-item" data-cat="urg">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Cuándo es urgente? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Dolor fuerte que no cede, cara hinchada o sangrado que no para. En esos casos consultar de inmediato.</div>
+    </div>
+    <div class="faq-item" data-cat="urg">
+      <div class="faq-q" onclick="toggleFaq(this)">¿Puedo tomar antibiótico? <span class="faq-arrow">▾</span></div>
+      <div class="faq-a">Solo si lo indica el odontólogo. No automedicarse.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: POST PROCEDIMIENTOS -->
+<div class="screen" id="screen-post">
+  <div class="section-title">🩹 Después de tu Turno</div>
+
+  <div class="post-tabs">
+    <div class="post-tab active" onclick="setPostTab(this, 'extraccion')">🔧 Extracción</div>
+    <div class="post-tab" onclick="setPostTab(this, 'conducto')">🔬 Conducto</div>
+    <div class="post-tab" onclick="setPostTab(this, 'resina')">🦷 Resina</div>
+    <div class="post-tab" onclick="setPostTab(this, 'blanq')">✨ Blanqueamiento</div>
+    <div class="post-tab" onclick="setPostTab(this, 'limpieza')">🧹 Limpieza</div>
+    <div class="post-tab" onclick="setPostTab(this, 'corona')">👑 Corona</div>
+    <div class="post-tab" onclick="setPostTab(this, 'protesis')">😁 Prótesis</div>
+    <div class="post-tab" onclick="setPostTab(this, 'implante')">🦷 Implante</div>
+    <div class="post-tab" onclick="setPostTab(this, 'orto')">😁 Ortodoncia</div>
+    <div class="post-tab" onclick="setPostTab(this, 'perio')">🩸 Periodoncia</div>
+    <div class="post-tab" onclick="setPostTab(this, 'cirugia')">🏥 Cirugía</div>
+    <div class="post-tab" onclick="setPostTab(this, 'pedo')">👶 Odontopediatría</div>
+  </div>
+
+  <!-- EXTRACCIÓN -->
+  <div class="post-content active" id="post-extraccion">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Sangrado leve</div><div class="post-item">Molestia las primeras horas</div><div class="post-item">Inflamación leve</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Morder gasa 30 minutos</div><div class="post-item">Aplicar frío externo 10 min cada hora</div><div class="post-item">Tomar analgésico habitual</div><div class="post-item">Dieta blanda y fría</div></div></div>
+    <div class="post-section"><div class="post-label label-evitar">🧡 Evitar</div><div class="post-items"><div class="post-item">No enjuagar fuerte 24 hs</div><div class="post-item">No fumar ni alcohol</div><div class="post-item">No alimentos calientes</div><div class="post-item">No actividad física intensa</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">Sangrado intenso más de 2-3 horas</div><div class="post-item">Dolor muy fuerte después de 48 hs</div><div class="post-item">Inflamación que aumenta</div><div class="post-item">Fiebre</div></div></div>
+  </div>
+
+  <!-- CONDUCTO -->
+  <div class="post-content" id="post-conducto">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Sensibilidad al morder</div><div class="post-item">Molestia leve algunos días</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Tomar paracetamol si hay molestia</div><div class="post-item">Masticar del lado contrario</div><div class="post-item">Mantener higiene normal</div></div></div>
+    <div class="post-section"><div class="post-label label-evitar">🧡 Evitar</div><div class="post-items"><div class="post-item">No morder alimentos duros</div><div class="post-item">No usar ese diente hasta restaurarlo</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">Dolor aumenta con los días</div><div class="post-item">Aparece hinchazón</div><div class="post-item">Sensación de diente alto</div></div></div>
+    <div style="background:#FEF3C7;border-radius:10px;padding:12px;margin-top:8px;font-size:13px;color:#92400E">⚠️ El diente debe restaurarse con resina o corona para evitar fracturas.</div>
+  </div>
+
+  <!-- RESINA -->
+  <div class="post-content" id="post-resina">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Sensibilidad al frío/calor</div><div class="post-item">Leve molestia al morder</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Cepillado normal</div><div class="post-item">Evitar presión excesiva</div></div></div>
+    <div class="post-section"><div class="post-label label-evitar">🧡 Evitar</div><div class="post-items"><div class="post-item">Alimentos duros 24 hs</div><div class="post-item">Pegajosos (chicle, caramelos)</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">Mordida se siente alta</div><div class="post-item">Dolor al morder</div><div class="post-item">Sensibilidad que no mejora</div></div></div>
+  </div>
+
+  <!-- BLANQUEAMIENTO -->
+  <div class="post-content" id="post-blanq">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Sensibilidad temporal</div><div class="post-item">Encías levemente irritadas</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Usar pasta para sensibilidad</div><div class="post-item">Tomar agua fría si molesta</div></div></div>
+    <div class="post-section"><div class="post-label label-evitar">🧡 Evitar 48 hs</div><div class="post-items"><div class="post-item">Café, té, vino tinto, tomate</div><div class="post-item">Salsas oscuras</div><div class="post-item">Fumar</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">Sensibilidad muy intensa</div><div class="post-item">Dolor persistente</div></div></div>
+  </div>
+
+  <!-- LIMPIEZA -->
+  <div class="post-content" id="post-limpieza">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Encías sensibles</div><div class="post-item">Sangrado leve</div><div class="post-item">Sensibilidad al frío</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Continuar higiene normal</div><div class="post-item">Usar cepillo suave</div><div class="post-item">Enjuague sin alcohol (opcional)</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">Sangrado abundante</div><div class="post-item">Dolor intenso</div><div class="post-item">Inflamación que aumenta</div></div></div>
+  </div>
+
+  <!-- CORONA -->
+  <div class="post-content" id="post-corona">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Sensibilidad al frío/calor los primeros días</div><div class="post-item">Leve molestia al morder</div><div class="post-item">Sensación de extraño en la boca</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Cepillar con cuidado la zona</div><div class="post-item">Hilo dental suavemente por los lados</div><div class="post-item">Tomar paracetamol si hay molestia</div></div></div>
+    <div class="post-section"><div class="post-label label-evitar">🧡 Evitar</div><div class="post-items"><div class="post-item">Alimentos muy duros o pegajosos</div><div class="post-item">Morder con fuerza primeras 24 hs</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">La corona se afloja o se cae</div><div class="post-item">Dolor al morder que no mejora</div><div class="post-item">Mordida muy alta o incómoda</div></div></div>
+  </div>
+
+  <!-- PRÓTESIS -->
+  <div class="post-content" id="post-protesis">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Sensación de extraño en la boca</div><div class="post-item">Dificultad para hablar al inicio</div><div class="post-item">Leve molestia en encías</div><div class="post-item">Aumento de saliva los primeros días</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Retirarla para dormir</div><div class="post-item">Limpiarla con cepillo especial</div><div class="post-item">Guardarla en agua cuando no la usas</div></div></div>
+    <div class="post-section"><div class="post-label label-evitar">🧡 Evitar</div><div class="post-items"><div class="post-item">No usar pegamentos sin indicación</div><div class="post-item">No ajustarla sola — consultar</div><div class="post-item">No dejarla secar — se deforma</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">Lastima o genera heridas en la encía</div><div class="post-item">Se rompe o fisura</div><div class="post-item">No puedes colocarla o retirarla</div></div></div>
+  </div>
+
+  <!-- IMPLANTE -->
+  <div class="post-content" id="post-implante">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Inflamación los primeros días</div><div class="post-item">Moretón leve en piel o encía</div><div class="post-item">Molestia leve al masticar</div><div class="post-item">Pequeño sangrado inicial</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Tomar la medicación indicada</div><div class="post-item">Aplicar frío externo primeras 24 hs</div><div class="post-item">Dieta blanda los primeros días</div><div class="post-item">Higiene suave con cepillo blando</div></div></div>
+    <div class="post-section"><div class="post-label label-evitar">🧡 Evitar</div><div class="post-items"><div class="post-item">No fumar</div><div class="post-item">No tocar la zona con lengua o dedos</div><div class="post-item">No alimentos duros o calientes</div><div class="post-item">No actividad física intensa 48-72 hs</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">Sangrado abundante que no cede</div><div class="post-item">Dolor intenso que aumenta después del tercer día</div><div class="post-item">Fiebre</div><div class="post-item">Sensación de implante suelto</div></div></div>
+    <div style="background:var(--primary-light);border-radius:10px;padding:12px;margin-top:8px;font-size:13px;color:var(--primary-dark)">📅 Controles: 7 días · Cicatrización · Integración · Corona definitiva</div>
+  </div>
+
+  <!-- ORTODONCIA -->
+  <div class="post-content" id="post-orto">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Molestia leve los primeros días</div><div class="post-item">Dientes levemente móviles</div><div class="post-item">Dolor suave después de cada ajuste (2-3 días)</div><div class="post-item">Irritación en mejillas o labios</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Tomar paracetamol si molesta</div><div class="post-item">Comer alimentos blandos tras los ajustes</div><div class="post-item">Usar cera ortodóntica si roza</div><div class="post-item">Usar elásticos o alineadores según indicación</div></div></div>
+    <div class="post-section"><div class="post-label label-evitar">🧡 Evitar</div><div class="post-items"><div class="post-item">Alimentos duros (hielo, frutos secos)</div><div class="post-item">Alimentos pegajosos (chicle, caramelos)</div><div class="post-item">Morder uñas o lapiceras</div><div class="post-item">No usar retenedores al finalizar</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">Bracket despegado</div><div class="post-item">Alambre que pincha</div><div class="post-item">Dolor intenso que no mejora en 3 días</div><div class="post-item">Alineador perdido o roto</div></div></div>
+  </div>
+
+  <!-- PERIODONCIA -->
+  <div class="post-content" id="post-perio">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Sensibilidad al frío y calor</div><div class="post-item">Encías sensibles</div><div class="post-item">Sangrado leve al cepillarse</div><div class="post-item">Sensación de dientes más largos</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Tomar paracetamol si hay molestia</div><div class="post-item">Cepillo de cerdas blandas</div><div class="post-item">Enjuague con clorhexidina según indicación</div><div class="post-item">Mantener controles cada 3-4 meses</div></div></div>
+    <div class="post-section"><div class="post-label label-evitar">🧡 Evitar</div><div class="post-items"><div class="post-item">Alimentos muy fríos o calientes 48 hs</div><div class="post-item">Fumar — retrasa la cicatrización</div><div class="post-item">Suspender higiene por miedo al sangrado</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">Sangrado abundante que no cede</div><div class="post-item">Dolor que aumenta con los días</div><div class="post-item">Fiebre</div><div class="post-item">Diente que se mueve más</div></div></div>
+  </div>
+
+  <!-- CIRUGÍA -->
+  <div class="post-content" id="post-cirugia">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Inflamación y moretón los primeros días</div><div class="post-item">Molestia leve a moderada</div><div class="post-item">Sangrado leve inicial</div><div class="post-item">Dificultad para abrir la boca</div><div class="post-item">Febrícula primeras 24 hs</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Tomar medicación indicada</div><div class="post-item">Frío externo primeras 24 hs</div><div class="post-item">Dieta blanda y fría</div><div class="post-item">Reposo relativo 24-48 hs</div></div></div>
+    <div class="post-section"><div class="post-label label-evitar">🧡 Evitar</div><div class="post-items"><div class="post-item">No fumar</div><div class="post-item">No alimentos duros o calientes</div><div class="post-item">No actividad física intensa 72 hs</div><div class="post-item">No enjuagar con fuerza primeras 24 hs</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">Sangrado abundante que no cede</div><div class="post-item">Fiebre mayor a 38°C después de 24 hs</div><div class="post-item">Inflamación que empeora</div><div class="post-item">Puntos que se abren antes del control</div></div></div>
+  </div>
+
+  <!-- ODONTOPEDIATRÍA -->
+  <div class="post-content" id="post-pedo">
+    <div class="post-section"><div class="post-label label-normal">✅ Es normal</div><div class="post-items"><div class="post-item">Molestia leve en la zona tratada</div><div class="post-item">Entumecimiento por anestesia (1-2 horas)</div><div class="post-item">Sangrado leve si hubo extracción</div><div class="post-item">Niño más sensible o irritable</div></div></div>
+    <div class="post-section"><div class="post-label label-hacer">💙 Qué hacer</div><div class="post-items"><div class="post-item">Paracetamol infantil si hay molestia</div><div class="post-item">Vigilar que no muerda labio o mejilla</div><div class="post-item">Alimentación blanda y fría primeras horas</div><div class="post-item">Hablar positivamente de la experiencia</div></div></div>
+    <div class="post-section"><div class="post-label label-evitar">🧡 Evitar</div><div class="post-items"><div class="post-item">No alimentos calientes mientras dure la anestesia</div><div class="post-item">No dejar al niño solo con anestesia</div><div class="post-item">No suspender la higiene al día siguiente</div></div></div>
+    <div class="post-section"><div class="post-label label-llamar">🔴 Llamar si...</div><div class="post-items"><div class="post-item">Sangrado que no cede después de 30 min</div><div class="post-item">Dolor intenso que no mejora</div><div class="post-item">Mordedura del labio con herida importante</div><div class="post-item">Fiebre</div></div></div>
+    <div style="background:var(--lavender);border-radius:10px;padding:12px;margin-top:8px;font-size:13px;color:var(--lavender-accent)">💡 Una experiencia positiva evita el miedo al dentista. No usar el dentista como castigo.</div>
+  </div>
+</div>
+
+<!-- SCREEN: RED PROFESIONAL -->
+<div class="screen" id="screen-red">
+  <div class="section-title">🕸️ Red Profesional</div>
+
+  <div class="red-section">
+    <div class="red-title">Mi Red byRadii</div>
+    <div class="red-sub">Powered by Radii · byradi.com</div>
+    <div class="red-grid">
+      <div class="red-btn">
+        <div class="red-btn-icon">👥</div>
+        <div class="red-btn-label">Internos</div>
+        <div class="red-btn-count">5 activos</div>
+      </div>
+      <div class="red-btn">
+        <div class="red-btn-icon">🔗</div>
+        <div class="red-btn-label">Derivaciones</div>
+        <div class="red-btn-count">6 especialistas</div>
+      </div>
+      <div class="red-btn">
+        <div class="red-btn-icon">⭐</div>
+        <div class="red-btn-label">Referidos</div>
+        <div class="red-btn-count">3 activos</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--gray-800)">👥 Equipo Interno</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--gray-50);border-radius:10px">
+        <div style="width:36px;height:36px;background:linear-gradient(135deg,#2563EB,#60A5FA);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px">👩‍⚕️</div>
+        <div><div style="font-size:13px;font-weight:600">Dra. [Nombre]</div><div style="font-size:11px;color:var(--gray-400)">Titular · Dashboard completo</div></div>
+        <div style="margin-left:auto;font-size:10px;background:#DCFCE7;color:#16A34A;padding:3px 8px;border-radius:10px;font-weight:600">ACTIVO</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--gray-50);border-radius:10px">
+        <div style="width:36px;height:36px;background:linear-gradient(135deg,#7C3AED,#A78BFA);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px">👩</div>
+        <div><div style="font-size:13px;font-weight:600">Asistente</div><div style="font-size:11px;color:var(--gray-400)">Acceso parcial · Turnos</div></div>
+        <div style="margin-left:auto;font-size:10px;background:#DCFCE7;color:#16A34A;padding:3px 8px;border-radius:10px;font-weight:600">ACTIVO</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--gray-50);border-radius:10px">
+        <div style="width:36px;height:36px;background:linear-gradient(135deg,#F97316,#FED7AA);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px">💼</div>
+        <div><div style="font-size:13px;font-weight:600">Secretaria</div><div style="font-size:11px;color:var(--gray-400)">Acceso · Agenda y derivaciones</div></div>
+        <div style="margin-left:auto;font-size:10px;background:#DCFCE7;color:#16A34A;padding:3px 8px;border-radius:10px;font-weight:600">ACTIVO</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--gray-800)">🔗 Círculo de Derivaciones</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--gray-50);border-radius:10px">
+        <div style="font-size:24px">🦷</div>
+        <div><div style="font-size:13px;font-weight:600">Dr. [Implantólogo]</div><div style="font-size:11px;color:var(--gray-400)">Implantología</div></div>
+        <div style="margin-left:auto;font-size:20px">💬</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--gray-50);border-radius:10px">
+        <div style="font-size:24px">🩸</div>
+        <div><div style="font-size:13px;font-weight:600">Dr. [Periodoncista]</div><div style="font-size:11px;color:var(--gray-400)">Periodoncia</div></div>
+        <div style="margin-left:auto;font-size:20px">💬</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:8px;background:var(--gray-50);border-radius:10px">
+        <div style="font-size:24px">😁</div>
+        <div><div style="font-size:13px;font-weight:600">Dr. [Ortodoncista]</div><div style="font-size:11px;color:var(--gray-400)">Ortodoncia</div></div>
+        <div style="margin-left:auto;font-size:20px">💬</div>
+      </div>
+    </div>
+    <div style="margin-top:12px;text-align:center;font-size:12px;color:var(--gray-400)">Círculo base: 6 especialistas · Ampliable a 12</div>
+  </div>
+
+  <div class="card" style="background:linear-gradient(135deg,#F0FDF4,#DCFCE7);border-color:#BBF7D0">
+    <div style="font-size:14px;font-weight:700;margin-bottom:8px;color:#166534">⭐ Sistema de Referidos</div>
+    <div style="font-size:13px;color:#15803D;margin-bottom:12px">Invita a colegas y ambos se benefician</div>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px">
+      <div style="font-size:12px;color:#166534;display:flex;gap:6px;align-items:center"><span>✓</span> Tú: créditos para mejoras en tu app</div>
+      <div style="font-size:12px;color:#166534;display:flex;gap:6px;align-items:center"><span>✓</span> Tu referido: precio especial al adherirse</div>
+      <div style="font-size:12px;color:#166534;display:flex;gap:6px;align-items:center"><span>✓</span> Red que crece orgánicamente</div>
+    </div>
+    <button class="btn-primary" style="background:linear-gradient(135deg,#16A34A,#22C55E)">⭐ Invitar un colega</button>
+  </div>
+
+  <div class="powered">Powered by <span>Radii</span> · byradi.com</div>
+</div>
+
+<!-- SCREEN: TURNOS -->
+<div class="screen" id="screen-turnos">
+  <div class="section-title">📅 Solicitar Turno</div>
+
+  <div class="turno-step">
+    <div class="step-num">Paso 1 de 4</div>
+    <div class="step-title">¿Cuál es el motivo?</div>
+    <div class="motivo-grid">
+      <div class="motivo-btn" onclick="selectMotivo(this, 'Control y prevención')">
+        <div class="motivo-icon">🟢</div>
+        <div class="motivo-label">Control y prevención</div>
+      </div>
+      <div class="motivo-btn" onclick="selectMotivo(this, 'Tengo una molestia')">
+        <div class="motivo-icon">🟡</div>
+        <div class="motivo-label">Tengo una molestia</div>
+      </div>
+      <div class="motivo-btn" onclick="selectMotivo(this, 'Es una urgencia')">
+        <div class="motivo-icon">🔴</div>
+        <div class="motivo-label">Es una urgencia</div>
+      </div>
+      <div class="motivo-btn" onclick="selectMotivo(this, 'Consulta estética')">
+        <div class="motivo-icon">✨</div>
+        <div class="motivo-label">Consulta estética</div>
+      </div>
+      <div class="motivo-btn" onclick="selectMotivo(this, 'Continuar tratamiento')">
+        <div class="motivo-icon">🦷</div>
+        <div class="motivo-label">Continuar tratamiento</div>
+      </div>
+      <div class="motivo-btn" onclick="selectMotivo(this, 'Otra consulta')">
+        <div class="motivo-icon">💬</div>
+        <div class="motivo-label">Otra consulta</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="turno-step">
+    <div class="step-num">Paso 2 de 4</div>
+    <div class="step-title">¿Cuál es tu sede?</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div class="motivo-btn" onclick="selectRadio(this, '.sede-radio')" style="text-align:left;display:flex;align-items:center;gap:10px">
+        <span style="font-size:20px">🏙️</span><span class="motivo-label">Sede Centro — Av. Principal 123</span>
+      </div>
+      <div class="motivo-btn" onclick="selectRadio(this, '.sede-radio')" style="text-align:left;display:flex;align-items:center;gap:10px">
+        <span style="font-size:20px">🌿</span><span class="motivo-label">Sede Norte — Calle Norte 456</span>
+      </div>
+      <div class="motivo-btn" onclick="selectRadio(this, '.sede-radio')" style="text-align:left;display:flex;align-items:center;gap:10px">
+        <span style="font-size:20px">🌊</span><span class="motivo-label">Sede Sur — Av. Sur 789</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="turno-step">
+    <div class="step-num">Paso 3 de 4</div>
+    <div class="step-title">Tus datos</div>
+    <input class="input-field" type="text" placeholder="Nombre completo">
+    <input class="input-field" type="tel" placeholder="Teléfono / WhatsApp">
+    <input class="input-field" type="email" placeholder="Email (opcional)">
+    <div style="font-size:13px;font-weight:600;color:var(--gray-600);margin-bottom:8px">¿Es tu primera visita?</div>
+    <div class="radio-group">
+      <div class="radio-btn" onclick="selectRadio(this, '.primera-radio')">Sí, primera vez</div>
+      <div class="radio-btn" onclick="selectRadio(this, '.primera-radio')">Ya soy paciente</div>
+    </div>
+    <input class="input-field" type="text" placeholder="Mensaje adicional (opcional)" style="margin-top:4px">
+  </div>
+
+  <div style="padding: 0 16px 20px">
+    <button class="btn-primary" onclick="enviarTurno()">
+      📅 Enviar solicitud por WhatsApp
+    </button>
+    <div style="text-align:center;font-size:12px;color:var(--gray-400);margin-top:10px">Recibirás confirmación por WhatsApp o llamada</div>
+  </div>
+</div>
+
+<!-- SCREEN: PERFIL SEDE -->
+<div class="screen" id="screen-sede">
+  <div class="sede-info-card">
+    <div class="sede-name" id="sedeNombre">Happy Smile — Centro</div>
+    <div class="sede-addr">📍 <span id="sedeDireccion">Av. Principal 123</span></div>
+    <div class="contact-grid">
+      <div class="contact-btn" onclick="openWhatsApp()"><span>💬</span>WhatsApp</div>
+      <div class="contact-btn"><span>📞</span>Llamar</div>
+      <div class="contact-btn"><span>📍</span>Cómo llegar</div>
+      <div class="contact-btn"><span>🕐</span>Horarios</div>
+    </div>
+  </div>
+
+  <div class="section-title">👩‍⚕️ Nuestro Equipo</div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">👩‍⚕️</div>
+      <div class="team-name">Dra. [Nombre]</div>
+      <div class="team-role">Odontología General</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">👨‍⚕️</div>
+      <div class="team-name">Dr. [Nombre]</div>
+      <div class="team-role">Implantología</div>
+    </div>
+  </div>
+
+  <div class="section-title">🖼️ Nuestra Clínica</div>
+  <div style="padding:0 16px;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+    <div style="background:linear-gradient(135deg,#EFF6FF,#DBEAFE);border-radius:12px;height:100px;display:flex;align-items:center;justify-content:center;font-size:36px">🏥</div>
+    <div style="background:linear-gradient(135deg,#F5F3FF,#EDE9FE);border-radius:12px;height:100px;display:flex;align-items:center;justify-content:center;font-size:36px">🦷</div>
+    <div style="background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border-radius:12px;height:100px;display:flex;align-items:center;justify-content:center;font-size:36px">✨</div>
+    <div style="background:linear-gradient(135deg,#FFF7ED,#FED7AA);border-radius:12px;height:100px;display:flex;align-items:center;justify-content:center;font-size:36px">😊</div>
+  </div>
+
+  <div class="powered">Powered by <span>Radii</span> · byradi.com</div>
+</div>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="showScreen('screen-inicio'); setNav(this)">
+    <span class="nav-icon">🏠</span>
+    <span class="nav-label">Inicio</span>
+  </button>
+  <button class="nav-item" onclick="showScreen('screen-urgencias'); setNav(this)">
+    <span class="nav-icon">🚨</span>
+    <span class="nav-label">Urgencias</span>
+  </button>
+  <button class="nav-item" onclick="showScreen('screen-turnos'); setNav(this)">
+    <span class="nav-icon">📅</span>
+    <span class="nav-label">Turnos</span>
+  </button>
+  <button class="nav-item" onclick="showScreen('screen-orientacion'); setNav(this)">
+    <span class="nav-icon">💡</span>
+    <span class="nav-label">Consejos</span>
+  </button>
+  <button class="nav-item" onclick="showScreen('screen-sede'); setNav(this)">
+    <span class="nav-icon">📍</span>
+    <span class="nav-label">Mi Sede</span>
+  </button>
+</nav>
+
+<script>
+let sedeActual = 'Centro';
+let motivoActual = '';
+let historial = [];
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  historial.push(id);
+  const isHome = id === 'screen-inicio';
+  document.getElementById('backBtn').style.display = historial.length > 1 ? 'block' : 'none';
+  window.scrollTo(0, 0);
+}
+
+function goBack() {
+  historial.pop();
+  if (historial.length > 0) {
+    const prev = historial[historial.length - 1];
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(prev).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+  document.getElementById('backBtn').style.display = historial.length > 1 ? 'block' : 'none';
+}
+
+function setNav(el) {
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+  historial = [];
+  document.getElementById('backBtn').style.display = 'none';
+}
+
+function selectSede(nombre, dir) {
+  sedeActual = nombre;
+  document.getElementById('sedeBadge').textContent = nombre;
+  document.getElementById('sedeBadge').style.display = 'block';
+  document.getElementById('sedeNombre').textContent = 'Happy Smile — ' + nombre;
+  document.getElementById('sedeDireccion').textContent = dir;
+  document.querySelectorAll('.sede-btn').forEach(b => b.classList.remove('selected'));
+  event.target.closest('.sede-btn').classList.add('selected');
+}
+
+function toggleProc(card) {
+  card.classList.toggle('open');
+}
+
+function toggleEsp(card) {
+  card.classList.toggle('open');
+}
+
+function toggleFaq(header) {
+  const item = header.closest('.faq-item');
+  item.classList.toggle('open');
+}
+
+function toggleAccordion(header) {
+  const acc = header.closest('.accordion');
+  acc.classList.toggle('open');
+}
+
+function setFaqCat(el, cat) {
+  document.querySelectorAll('.faq-cat').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.style.display = item.dataset.cat === cat ? 'block' : 'none';
+  });
+}
+
+function setPostTab(el, id) {
+  document.querySelectorAll('.post-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.post-content').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('post-' + id).classList.add('active');
+}
+
+function selectMotivo(el, motivo) {
+  document.querySelectorAll('.motivo-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  motivoActual = motivo;
+}
+
+function selectRadio(el, cls) {
+  const group = el.closest('.turno-step') || el.parentElement;
+  group.querySelectorAll('.motivo-btn, .radio-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function openWhatsApp() {
+  let msg = 'Hola, me comunico desde la app Happy Smile. ';
+  if (motivoActual === 'Es una urgencia') msg = 'Hola, tengo una urgencia y necesito un turno urgente.';
+  else if (motivoActual === 'Consulta estética') msg = 'Hola, quiero información sobre estética dental.';
+  else if (motivoActual === 'Control y prevención') msg = 'Hola, quisiera solicitar un turno de control.';
+  else msg = 'Hola, me comunico desde la app Happy Smile. Quisiera solicitar un turno.';
+  window.open('https://wa.me/549XXXXXXXXXX?text=' + encodeURIComponent(msg), '_blank');
+}
+
+function enviarTurno() {
+  const nombre = document.querySelector('input[type="text"]')?.value || '[Nombre]';
+  const msg = `Hola, solicito turno desde la app Happy Smile.\n\nNombre: ${nombre}\nMotivo: ${motivoActual || 'No especificado'}\nSede: ${sedeActual}`;
+  window.open('https://wa.me/549XXXXXXXXXX?text=' + encodeURIComponent(msg), '_blank');
+}
+
+// Init FAQ
+document.querySelectorAll('.faq-item').forEach(item => {
+  if (item.dataset.cat !== 'dolor') item.style.display = 'none';
+});
+</script>
+</body>
+</html>
